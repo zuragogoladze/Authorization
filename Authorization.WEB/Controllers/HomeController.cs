@@ -5,14 +5,21 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Authorization.Core.ViewModels;
+using Authorization.WEB.Controllers.Shared;
+using Authorization.Core.Interfaces;
 
 namespace Authorization.WEB.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : SharedController
     {
+        public HomeController(IRepositoryWrapper repoWrapper) : base(repoWrapper)
+        {
+        }
+
         public IActionResult Index()
         {
-            return View();
+            var model = _repoWrapper.Tags.FindAll();
+            return View(model);
         }
 
         public IActionResult Privacy()

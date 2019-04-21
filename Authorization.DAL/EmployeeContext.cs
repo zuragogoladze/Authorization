@@ -20,6 +20,8 @@ namespace Authorization.DAL
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<IdentityRole>().HasData(new IdentityRole { Name = "Admin", NormalizedName = "Admin".ToUpper() });
+            modelBuilder.Entity<Tags>().HasData(new Tags { Id = 1, Name = "News", CreateDate = new DateTime(1993, 12, 18) });
+
         }
     }
 }

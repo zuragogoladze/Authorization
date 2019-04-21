@@ -14,6 +14,9 @@ using Authorization.DAL;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Authorization.DAL.Model;
+using Authorization.Core.Interfaces;
+using Repository;
+using Authorization.Core.Repositories;
 
 namespace Authorization.WEB
 {
@@ -43,6 +46,9 @@ namespace Authorization.WEB
                 .AddRoles<IdentityRole>() // remove
                 .AddDefaultUI(UIFramework.Bootstrap4)
                 .AddEntityFrameworkStores<EmployeeContext>();
+
+            services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();
+            services.AddTransient<IUserResolver, UserResolver>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
