@@ -13,7 +13,7 @@ namespace Authorization.Tests
     {
         [TestMethod]
         [TestCategory("Unit")]
-        public async Task GetUsers()
+        public void GetUsers()
         {
             var mUsrSvc = new Mock<IUserResolver>();
             mUsrSvc
