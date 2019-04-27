@@ -32,29 +32,24 @@ namespace Authorization.WEB
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.Configure<CookiePolicyOptions>(options =>
-            {
-                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
-                options.CheckConsentNeeded = context => true;
-                options.MinimumSameSitePolicy = SameSiteMode.None;
-            });
+            //services.Configure<CookiePolicyOptions>(options =>
+            //{
+            //    // This lambda determines whether user consent for non-essential cookies is needed for a given request.
+            //    options.CheckConsentNeeded = context => true;
+            //    options.MinimumSameSitePolicy = SameSiteMode.None;
+            //});
 
             services.AddDbContext<EmployeeContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>()
-                .AddRoles<IdentityRole>() // remove
-                .AddDefaultUI(UIFramework.Bootstrap4)
-                .AddEntityFrameworkStores<EmployeeContext>();
-
-            services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();
-            services.AddTransient<IUserResolver, UserResolver>();
+            
+            //services.AddTransient<IUserResolver, UserResolver>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, UserManager<IdentityUser> userManager)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, EmployeeContext dbContext)
         {
             if (env.IsDevelopment())
             {
@@ -68,11 +63,13 @@ namespace Authorization.WEB
                 app.UseHsts();
             }
 
+            dbContext.Database.Migrate();
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
 
-            app.UseAuthentication();
+            //app.UseAuthentication();
 
             app.UseMvc(routes =>
             {
@@ -80,7 +77,6 @@ namespace Authorization.WEB
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
-            SampleData.SeedUsers(userManager);
         }
     }
 }

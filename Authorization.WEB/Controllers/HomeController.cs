@@ -12,14 +12,13 @@ namespace Authorization.WEB.Controllers
 {
     public class HomeController : SharedController
     {
-        public HomeController(IRepositoryWrapper repoWrapper) : base(repoWrapper)
+        public HomeController(/*IRepositoryWrapper repoWrapper*/) /*: base(repoWrapper)*/
         {
         }
 
         public IActionResult Index()
         {
-            var model = _repoWrapper.Tags.FindAll();
-            return View(model);
+            return View();
         }
 
         public IActionResult Privacy()
@@ -27,10 +26,10 @@ namespace Authorization.WEB.Controllers
             return View();
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
+        //[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        //public IActionResult Error()
+        //{
+        //    return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        //}
     }
 }

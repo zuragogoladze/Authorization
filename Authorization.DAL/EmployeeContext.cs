@@ -8,20 +8,26 @@ using System.Text;
 
 namespace Authorization.DAL
 {
-    public class EmployeeContext : IdentityDbContext<IdentityUser>
+    public class EmployeeContext : DbContext
     {
         public EmployeeContext(DbContextOptions<EmployeeContext> options)
             : base(options)
         {
         }
-        public DbSet<Tags> Tags { get; }
+        public DbSet<Person> Persons { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<IdentityRole>().HasData(new IdentityRole { Name = "Admin", NormalizedName = "Admin".ToUpper() });
-            modelBuilder.Entity<Tags>().HasData(new Tags { Id = 1, Name = "News", CreateDate = new DateTime(1993, 12, 18) });
-
+            modelBuilder.Entity<Person>().HasData(
+                new Person
+                {
+                    Id = 1,
+                    Name = "Zura",
+                    Username = "zura1",
+                    Password = "9PsbZovEoCkMiksUuLhLWYjwMSpUKLFbKw2u8dO/9Wg="
+                }
+            );
         }
     }
 }

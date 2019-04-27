@@ -11,11 +11,11 @@ namespace Authorization.WEB.Controllers.Shared
     [Authorize]
     public class SharedController : Controller
     {
-        protected IRepositoryWrapper _repoWrapper;
+        //protected IRepositoryWrapper _repoWrapper;
 
-        public SharedController(IRepositoryWrapper repoWrapper)
-        {
-            _repoWrapper = repoWrapper;
-        }
+        //public SharedController(IRepositoryWrapper repoWrapper)
+        //{
+        //    _repoWrapper = repoWrapper;
+        //}
     }
 }

@@ -4,8 +4,8 @@ using System.Text;
 
 namespace Authorization.Core.Interfaces
 {
-    public interface IRepositoryWrapper
+    public interface IPersonsRepository<T> : IRepositoryBase<T>
     {
-        ITagsRepository Tags { get; }
+        T GetPerson(string username, string password);
     }
 }
