@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@{
+    var authenticate = await Context.AuthenticateAsync();
+}
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -13,7 +16,7 @@
               asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute"
               crossorigin="anonymous"
-              integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE="/>
+              integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" />
     </environment>
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
@@ -27,18 +30,21 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <ul class="navbar-nav flex-grow-1">
+                    <ul class="navbar-nav flex-grow-1 justify-content-between">
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <form id="selectLanguage" asp-area="" asp-controller="Account" asp-action="SignOut" method="post">
+                        @if (authenticate.Succeeded)
+                        {
+                            <li class="nav-item">
+                                <form id="selectLanguage" asp-area="" asp-controller="Account" asp-action="SignOut" method="post">
                                     <div>
-                                        <input class="btn btn-success" type="submit" value="Log Out" />
+                                        <input class="btn float-right" type="submit" value="Log Out" />
                                     </div>
-                            </form>
-                        </li>
-                        
+                                </form>
+                            </li>
+                        }
+
                     </ul>
                 </div>
             </div>
