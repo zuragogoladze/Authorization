@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Cryptography.KeyDerivation;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Text;
+using Microsoft.AspNetCore.Cryptography.KeyDerivation;
+
 
 namespace Authorization.Core.Infrastructure
 {
